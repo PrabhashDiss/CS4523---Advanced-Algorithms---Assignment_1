@@ -1,8 +1,7 @@
 from treap import Treap
 import graphviz
 
-# Replace with your UoM Registration number's last two digits
-u = 76
+u = 44
 
 data_priority_pairs = [
     (15, 35), (30, 40), (10, 20), (5, 60), (20, 50),
