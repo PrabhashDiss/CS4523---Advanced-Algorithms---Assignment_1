@@ -221,7 +221,6 @@ public class SplayBST<Key extends Comparable<Key>, Value> {
         String resultsFile = "results/SplayBST_results.csv";
         
         try (java.io.PrintWriter pw = new java.io.PrintWriter(new java.io.FileWriter(resultsFile, true))) {
-            // CSV header (if file is empty, user can remove header duplication)
             pw.println("Operation,Set,DataFile,Duration(us),Error");
             for (String set : sets) {
                 for (String fileName : dataFiles) {
