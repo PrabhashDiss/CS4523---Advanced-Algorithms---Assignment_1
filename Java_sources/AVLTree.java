@@ -345,8 +345,12 @@ public class AVLTree<T extends Comparable<T>> {
         try {
             List<String> lines = Files.readAllLines(Paths.get(insertFile));
             List<Integer> numbers = new ArrayList<>();
-            for(String line : lines)
-                numbers.add(Integer.parseInt(line.trim()));
+            for(String line : lines) {
+                String[] tokens = line.split(",");
+                for(String token : tokens)
+                    if(!token.trim().isEmpty())
+                        numbers.add(Integer.parseInt(token.trim()));
+            }
             long start = System.nanoTime();
             for(Integer num : numbers)
                 avlTree.insert(num);
@@ -361,8 +365,12 @@ public class AVLTree<T extends Comparable<T>> {
         try {
             List<String> lines = Files.readAllLines(Paths.get(searchFile));
             List<Integer> numbers = new ArrayList<>();
-            for(String line : lines)
-                numbers.add(Integer.parseInt(line.trim()));
+            for(String line : lines) {
+                String[] tokens = line.split(",");
+                for(String token : tokens)
+                    if(!token.trim().isEmpty())
+                        numbers.add(Integer.parseInt(token.trim()));
+            }
             long start = System.nanoTime();
             for(Integer num : numbers)
                 avlTree.contains(num);
@@ -377,8 +385,12 @@ public class AVLTree<T extends Comparable<T>> {
         try {
             List<String> lines = Files.readAllLines(Paths.get(deleteFile));
             List<Integer> numbers = new ArrayList<>();
-            for(String line : lines)
-                numbers.add(Integer.parseInt(line.trim()));
+            for(String line : lines) {
+                String[] tokens = line.split(",");
+                for(String token : tokens)
+                    if(!token.trim().isEmpty())
+                        numbers.add(Integer.parseInt(token.trim()));
+            }
             long start = System.nanoTime();
             for(Integer num : numbers)
                 avlTree.remove(num);

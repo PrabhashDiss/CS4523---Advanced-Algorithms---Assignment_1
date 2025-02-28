@@ -544,8 +544,12 @@ public class BST<Key extends Comparable<Key>, Value> {
         try {
             List<String> lines = Files.readAllLines(Paths.get(insertFile));
             List<Long> numbers = new ArrayList<>();
-            for(String line : lines)
-                numbers.add(Long.parseLong(line.trim()));
+            for(String line : lines) {
+                String[] tokens = line.split(",");
+                for(String token : tokens)
+                    if(!token.trim().isEmpty())
+                        numbers.add(Long.parseLong(token.trim()));
+            }
             long start = System.nanoTime();
             for(Long num : numbers)
                 st.put(num, 1);
@@ -554,14 +558,18 @@ public class BST<Key extends Comparable<Key>, Value> {
         } catch(Exception e) {
             e.printStackTrace();
         }
-
+        
         // --- Search Test ---
         String searchFile = "data/search/set1/data_1.txt"; // adjust path as needed
         try {
             List<String> lines = Files.readAllLines(Paths.get(searchFile));
             List<Long> numbers = new ArrayList<>();
-            for(String line : lines)
-                numbers.add(Long.parseLong(line.trim()));
+            for(String line : lines) {
+                String[] tokens = line.split(",");
+                for(String token : tokens)
+                    if(!token.trim().isEmpty())
+                        numbers.add(Long.parseLong(token.trim()));
+            }
             long start = System.nanoTime();
             for(Long num : numbers)
                 st.get(num);
@@ -576,8 +584,12 @@ public class BST<Key extends Comparable<Key>, Value> {
         try {
             List<String> lines = Files.readAllLines(Paths.get(deleteFile));
             List<Long> numbers = new ArrayList<>();
-            for(String line : lines)
-                numbers.add(Long.parseLong(line.trim()));
+            for(String line : lines) {
+                String[] tokens = line.split(",");
+                for(String token : tokens)
+                    if(!token.trim().isEmpty())
+                        numbers.add(Long.parseLong(token.trim()));
+            }
             long start = System.nanoTime();
             for(Long num : numbers)
                 st.delete(num);

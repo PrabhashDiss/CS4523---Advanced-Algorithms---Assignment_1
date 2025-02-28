@@ -220,8 +220,13 @@ public class SplayBST<Key extends Comparable<Key>, Value> {
         try {
             List<String> lines = Files.readAllLines(Paths.get(insertFile));
             List<Long> numbers = new ArrayList<>();
-            for(String line : lines)
-                numbers.add(Long.parseLong(line.trim()));
+            for(String line : lines) {
+                // split on comma and parse each token
+                String[] tokens = line.split(",");
+                for(String token : tokens)
+                    if(!token.trim().isEmpty())
+                        numbers.add(Long.parseLong(token.trim()));
+            }
             long start = System.nanoTime();
             for(Long num : numbers)
                 st.put(num, 1);
@@ -236,8 +241,12 @@ public class SplayBST<Key extends Comparable<Key>, Value> {
         try {
             List<String> lines = Files.readAllLines(Paths.get(searchFile));
             List<Long> numbers = new ArrayList<>();
-            for(String line : lines)
-                numbers.add(Long.parseLong(line.trim()));
+            for(String line : lines) {
+                String[] tokens = line.split(",");
+                for(String token : tokens)
+                    if(!token.trim().isEmpty())
+                        numbers.add(Long.parseLong(token.trim()));
+            }
             long start = System.nanoTime();
             for(Long num : numbers)
                 st.get(num);
@@ -252,8 +261,12 @@ public class SplayBST<Key extends Comparable<Key>, Value> {
         try {
             List<String> lines = Files.readAllLines(Paths.get(deleteFile));
             List<Long> numbers = new ArrayList<>();
-            for(String line : lines)
-                numbers.add(Long.parseLong(line.trim()));
+            for(String line : lines) {
+                String[] tokens = line.split(",");
+                for(String token : tokens)
+                    if(!token.trim().isEmpty())
+                        numbers.add(Long.parseLong(token.trim()));
+            }
             long start = System.nanoTime();
             for(Long num : numbers)
                 st.remove(num);
