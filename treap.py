@@ -48,12 +48,12 @@ class Treap:
         if key < root.key:
             root.left = self.insert(root.left, key, priority)
             root.left.parent = root
-            if root.left.priority > root.priority:
+            if root.left.priority < root.priority:  # Change to maintain min-heap property
                 root = self.rotate_right(root)
         else:
             root.right = self.insert(root.right, key, priority)
             root.right.parent = root
-            if root.right.priority > root.priority:
+            if root.right.priority < root.priority:  # Change to maintain min-heap property
                 root = self.rotate_left(root)
         return root
 
@@ -69,7 +69,7 @@ class Treap:
                 return root.right
             elif root.right is None:
                 return root.left
-            if root.left.priority < root.right.priority:
+            if root.left.priority > root.right.priority:  # Change to maintain min-heap property
                 root = self.rotate_left(root)
                 root.left = self.delete(root.left, key)
             else:
