@@ -3,9 +3,11 @@ set -e
 
 SRC_DIR="./Java_sources"
 BIN_DIR="./bin"
+RESULTS_DIR="./results"
 
-# Create output directory if needed
+# Create output and results directories if needed
 mkdir -p "$BIN_DIR"
+mkdir -p "$RESULTS_DIR"
 
 # Compile all Java files
 javac -d "$BIN_DIR" "$SRC_DIR"/*.java
