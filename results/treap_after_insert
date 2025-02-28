@@ -1,0 +1,71 @@
+digraph {
+	node [fillcolor=lightblue style=filled]
+	"79
+10"
+	"79
+10" -> "54
+20" [label=L]
+	"54
+20" -> "49
+60" [label=L]
+	None_49_L [label=None fillcolor=white style=filled]
+	"49
+60" -> None_49_L [label=L]
+	None_49_R [label=None fillcolor=white style=filled]
+	"49
+60" -> None_49_R [label=R]
+	"54
+20" -> "69
+30" [label=R]
+	"69
+30" -> "59
+35" [label=L]
+	None_59_L [label=None fillcolor=white style=filled]
+	"59
+35" -> None_59_L [label=L]
+	"59
+35" -> "64
+50" [label=R]
+	None_64_L [label=None fillcolor=white style=filled]
+	"64
+50" -> None_64_L [label=L]
+	None_64_R [label=None fillcolor=white style=filled]
+	"64
+50" -> None_64_R [label=R]
+	"69
+30" -> "74
+40" [label=R]
+	None_74_L [label=None fillcolor=white style=filled]
+	"74
+40" -> None_74_L [label=L]
+	None_74_R [label=None fillcolor=white style=filled]
+	"74
+40" -> None_74_R [label=R]
+	"79
+10" -> "84
+25" [label=R]
+	None_84_L [label=None fillcolor=white style=filled]
+	"84
+25" -> None_84_L [label=L]
+	"84
+25" -> "104
+45" [label=R]
+	"104
+45" -> "89
+55" [label=L]
+	None_89_L [label=None fillcolor=white style=filled]
+	"89
+55" -> None_89_L [label=L]
+	"89
+55" -> "94
+70" [label=R]
+	None_94_L [label=None fillcolor=white style=filled]
+	"94
+70" -> None_94_L [label=L]
+	None_94_R [label=None fillcolor=white style=filled]
+	"94
+70" -> None_94_R [label=R]
+	None_104_R [label=None fillcolor=white style=filled]
+	"104
+45" -> None_104_R [label=R]
+}
