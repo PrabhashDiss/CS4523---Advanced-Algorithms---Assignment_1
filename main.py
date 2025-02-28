@@ -19,6 +19,10 @@ print("Treap after initial insertions:")
 treap.print_treap()
 
 def visualize_treap(treap):
+    # Set node defaults to a light fill colour.
+    dot = graphviz.Digraph()
+    dot.attr('node', style='filled', fillcolor='lightblue')
+    
     def add_edges(graph, node):
         # Process left child: add dummy "None" node if missing.
         if node.left:
@@ -26,18 +30,20 @@ def visualize_treap(treap):
             add_edges(graph, node.left)
         else:
             none_id = f"None_{node.key}_L"
-            graph.node(none_id, label="None")
+            # Override default so that None nodes are not lightblue.
+            graph.node(none_id, label="None", style='filled', fillcolor='white')
             graph.edge(f"{node.key}\n{node.priority}", none_id, label="L")
+        
         # Process right child: add dummy "None" node if missing.
         if node.right:
             graph.edge(f"{node.key}\n{node.priority}", f"{node.right.key}\n{node.right.priority}", label="R")
             add_edges(graph, node.right)
         else:
             none_id = f"None_{node.key}_R"
-            graph.node(none_id, label="None")
+            # Override default so that None nodes are not lightblue.
+            graph.node(none_id, label="None", style='filled', fillcolor='white')
             graph.edge(f"{node.key}\n{node.priority}", none_id, label="R")
-
-    dot = graphviz.Digraph()
+    
     if treap.root:
         dot.node(f"{treap.root.key}\n{treap.root.priority}")
         add_edges(dot, treap.root)
