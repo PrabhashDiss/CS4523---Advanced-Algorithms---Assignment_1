@@ -537,6 +537,8 @@ public class BST<Key extends Comparable<Key>, Value> {
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
+        BST<Long, Long> st = new BST<>();
+        
         String[] sets = {"set1", "set2"};
         String[] dataFiles = {"data_1.txt", "data_2.txt", "data_3.txt"};
         String[] operations = {"insert", "search", "delete"};
@@ -557,18 +559,14 @@ public class BST<Key extends Comparable<Key>, Value> {
                             }
                         }
                         long start = System.nanoTime();
-                        BST<Long, Long> st = new BST<>();
                         if(op.equals("insert")){
+                            st = new BST<>();
                             for(Long num : numbers)
                                 st.put(num, num);
                         } else if(op.equals("search")){
                             for(Long num : numbers)
-                                st.put(num, num);
-                            for(Long num : numbers)
                                 st.get(num);
                         } else if(op.equals("delete")){
-                            for(Long num : numbers)
-                                st.put(num, num);
                             for(Long num : numbers)
                                 st.delete(num);
                         }

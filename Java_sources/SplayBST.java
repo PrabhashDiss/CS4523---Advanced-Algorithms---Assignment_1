@@ -213,6 +213,8 @@ public class SplayBST<Key extends Comparable<Key>, Value> {
 
     // test client
     public static void main(String[] args) {
+        SplayBST<Long, Long> st = new SplayBST<>();
+        
         String[] sets = {"set1", "set2"};
         String[] dataFiles = {"data_1.txt", "data_2.txt", "data_3.txt"};
         String[] operations = {"insert", "search", "delete"};
@@ -235,20 +237,14 @@ public class SplayBST<Key extends Comparable<Key>, Value> {
                             }
                         }
                         long start = System.nanoTime();
-                        SplayBST<Long, Long> st = new SplayBST<>();
                         if(op.equals("insert")){
+                            st = new SplayBST<>();
                             for(Long num : numbers)
                                 st.put(num, num);
                         } else if(op.equals("search")){
-                            // preset tree from insertion for search test
-                            for(Long num : numbers)
-                                st.put(num, num);
                             for(Long num : numbers)
                                 st.get(num);
                         } else if(op.equals("delete")){
-                            // preset tree from insertion for delete test
-                            for(Long num : numbers)
-                                st.put(num, num);
                             for(Long num : numbers)
                                 st.remove(num);
                         }

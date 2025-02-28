@@ -338,6 +338,8 @@ public class AVLTree<T extends Comparable<T>> {
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
+        AVLTree<Long> avlTree = new AVLTree<>();
+        
         String[] sets = {"set1", "set2"};
         String[] dataFiles = {"data_1.txt", "data_2.txt", "data_3.txt"};
         String[] operations = {"insert", "search", "delete"};
@@ -358,18 +360,14 @@ public class AVLTree<T extends Comparable<T>> {
                             }
                         }
                         long start = System.nanoTime();
-                        AVLTree<Long> avlTree = new AVLTree<>();
                         if(op.equals("insert")){
+                            avlTree = new AVLTree<>();
                             for(Long num : numbers)
                                 avlTree.insert(num);
                         } else if(op.equals("search")){
                             for(Long num : numbers)
-                                avlTree.insert(num);
-                            for(Long num : numbers)
                                 avlTree.contains(num);
                         } else if(op.equals("delete")){
-                            for(Long num : numbers)
-                                avlTree.insert(num);
                             for(Long num : numbers)
                                 avlTree.remove(num);
                         }
