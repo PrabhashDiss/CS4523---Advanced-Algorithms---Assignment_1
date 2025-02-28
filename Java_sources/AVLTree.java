@@ -338,21 +338,22 @@ public class AVLTree<T extends Comparable<T>> {
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
-        AVLTree<Integer> avlTree = new AVLTree<>();
+        // Change type parameters to store numbers in value as well.
+        AVLTree<Long> avlTree = new AVLTree<>();
         
         // --- Insertion Test ---
         String insertFile = "data/insert/set1/data_1.txt"; // adjust path as needed
         try {
             List<String> lines = Files.readAllLines(Paths.get(insertFile));
-            List<Integer> numbers = new ArrayList<>();
+            List<Long> numbers = new ArrayList<>();
             for(String line : lines) {
                 String[] tokens = line.split(",");
                 for(String token : tokens)
                     if(!token.trim().isEmpty())
-                        numbers.add(Integer.parseInt(token.trim()));
+                        numbers.add(Long.parseLong(token.trim())); // changed here
             }
             long start = System.nanoTime();
-            for(Integer num : numbers)
+            for(Long num : numbers)
                 avlTree.insert(num);
             long duration = (System.nanoTime() - start) / 1000;
             System.out.println("AVLTree Insertion time for " + insertFile + ": " + duration + " µs");
@@ -364,15 +365,15 @@ public class AVLTree<T extends Comparable<T>> {
         String searchFile = "data/search/set1/data_1.txt"; // adjust path as needed
         try {
             List<String> lines = Files.readAllLines(Paths.get(searchFile));
-            List<Integer> numbers = new ArrayList<>();
+            List<Long> numbers = new ArrayList<>();
             for(String line : lines) {
                 String[] tokens = line.split(",");
                 for(String token : tokens)
                     if(!token.trim().isEmpty())
-                        numbers.add(Integer.parseInt(token.trim()));
+                        numbers.add(Long.parseLong(token.trim())); // changed here
             }
             long start = System.nanoTime();
-            for(Integer num : numbers)
+            for(Long num : numbers)
                 avlTree.contains(num);
             long duration = (System.nanoTime() - start) / 1000;
             System.out.println("AVLTree Search time for " + searchFile + ": " + duration + " µs");
@@ -384,15 +385,15 @@ public class AVLTree<T extends Comparable<T>> {
         String deleteFile = "data/delete/set1/data_1.txt"; // adjust path as needed
         try {
             List<String> lines = Files.readAllLines(Paths.get(deleteFile));
-            List<Integer> numbers = new ArrayList<>();
+            List<Long> numbers = new ArrayList<>();
             for(String line : lines) {
                 String[] tokens = line.split(",");
                 for(String token : tokens)
                     if(!token.trim().isEmpty())
-                        numbers.add(Integer.parseInt(token.trim()));
+                        numbers.add(Long.parseLong(token.trim())); // changed here
             }
             long start = System.nanoTime();
-            for(Integer num : numbers)
+            for(Long num : numbers)
                 avlTree.remove(num);
             long duration = (System.nanoTime() - start) / 1000;
             System.out.println("AVLTree Deletion time for " + deleteFile + ": " + duration + " µs");

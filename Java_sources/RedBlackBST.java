@@ -727,7 +727,8 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
-        RedBlackBST<Long, Integer> st = new RedBlackBST<>();
+        // Change type parameters to store numbers in value as well.
+        RedBlackBST<Long, Long> st = new RedBlackBST<>();
         
         // --- Insertion Test ---
         String insertFile = "data/insert/set1/data_1.txt"; // adjust path as needed
@@ -742,7 +743,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
             }
             long start = System.nanoTime();
             for(Long num : numbers)
-                st.put(num, 1);
+                st.put(num, num); // changed here
             long duration = (System.nanoTime() - start) / 1000;
             System.out.println("RedBlackBST Insertion time for " + insertFile + ": " + duration + " µs");
         } catch(Exception e) {

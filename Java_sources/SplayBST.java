@@ -213,7 +213,8 @@ public class SplayBST<Key extends Comparable<Key>, Value> {
 
     // test client
     public static void main(String[] args) {
-        SplayBST<Long, Integer> st = new SplayBST<>();
+        // Change type parameters to store numbers in value as well.
+        SplayBST<Long, Long> st = new SplayBST<>();
         
         // --- Insertion Test ---
         String insertFile = "data/insert/set1/data_1.txt"; // adjust path as needed
@@ -229,7 +230,7 @@ public class SplayBST<Key extends Comparable<Key>, Value> {
             }
             long start = System.nanoTime();
             for(Long num : numbers)
-                st.put(num, 1);
+                st.put(num, num); // changed here
             long duration = (System.nanoTime() - start) / 1000; // microseconds
             System.out.println("SplayBST Insertion time for " + insertFile + ": " + duration + " µs");
         } catch(Exception e) {
