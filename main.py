@@ -22,15 +22,15 @@ treap.print_treap()
 def visualize_treap(treap):
     def add_edges(graph, node):
         if node.left:
-            graph.edge(f"**{node.key}**: {node.priority}", f"**{node.left.key}**: {node.left.priority}")
+            graph.edge(f"{node.key}\n{node.priority}", f"{node.left.key}\n{node.left.priority}")
             add_edges(graph, node.left)
         if node.right:
-            graph.edge(f"**{node.key}**: {node.priority}", f"**{node.right.key}**: {node.right.priority}")
+            graph.edge(f"{node.key}\n{node.priority}", f"{node.right.key}\n{node.right.priority}")
             add_edges(graph, node.right)
 
     dot = graphviz.Digraph()
     if treap.root:
-        dot.node(f"**{treap.root.key}**: {treap.root.priority}")
+        dot.node(f"{treap.root.key}\n{treap.root.priority}")
         add_edges(dot, treap.root)
     return dot
 
