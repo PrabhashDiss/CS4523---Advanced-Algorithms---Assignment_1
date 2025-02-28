@@ -4,6 +4,7 @@ class Node:
         self.priority = priority
         self.left = None
         self.right = None
+        self.parent = None
 
 class Treap:
     def __init__(self):
@@ -12,13 +13,33 @@ class Treap:
     def rotate_right(self, node):
         new_root = node.left
         node.left = new_root.right
+        if new_root.right:
+            new_root.right.parent = node
         new_root.right = node
+        new_root.parent = node.parent
+        node.parent = new_root
+        if new_root.parent is None:
+            self.root = new_root
+        elif new_root.parent.left == node:
+            new_root.parent.left = new_root
+        else:
+            new_root.parent.right = new_root
         return new_root
 
     def rotate_left(self, node):
         new_root = node.right
         node.right = new_root.left
+        if new_root.left:
+            new_root.left.parent = node
         new_root.left = node
+        new_root.parent = node.parent
+        node.parent = new_root
+        if new_root.parent is None:
+            self.root = new_root
+        elif new_root.parent.left == node:
+            new_root.parent.left = new_root
+        else:
+            new_root.parent.right = new_root
         return new_root
 
     def insert(self, root, key, priority):
@@ -26,10 +47,12 @@ class Treap:
             return Node(key, priority)
         if key < root.key:
             root.left = self.insert(root.left, key, priority)
+            root.left.parent = root
             if root.left.priority > root.priority:
                 root = self.rotate_right(root)
         else:
             root.right = self.insert(root.right, key, priority)
+            root.right.parent = root
             if root.right.priority > root.priority:
                 root = self.rotate_left(root)
         return root
