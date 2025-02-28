@@ -727,66 +727,48 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
-        // Change type parameters to store numbers in value as well.
-        RedBlackBST<Long, Long> st = new RedBlackBST<>();
+        String[] sets = {"set1", "set2"};
+        String[] operations = {"insert", "search", "delete"};
+        String[] dataFiles = {"data_1.txt", "data_2.txt", "data_3.txt"};
+        String resultsFile = "results/RedBlackBST_results.csv";
         
-        // --- Insertion Test ---
-        String insertFile = "data/insert/set1/data_1.txt"; // adjust path as needed
-        try {
-            List<String> lines = Files.readAllLines(Paths.get(insertFile));
-            List<Long> numbers = new ArrayList<>();
-            for(String line : lines) {
-                String[] tokens = line.split(",");
-                for(String token : tokens)
-                    if(!token.trim().isEmpty())
-                        numbers.add(Long.parseLong(token.trim()));
+        try (java.io.PrintWriter pw = new java.io.PrintWriter(new java.io.FileWriter(resultsFile, true))) {
+            pw.println("Operation,Set,DataFile,Duration(us)");
+            for(String op : operations) {
+                for(String set : sets) {
+                    for(String fileName : dataFiles) {
+                        String filePath = "data/" + op + "/" + set + "/" + fileName;
+                        java.util.List<String> lines = java.nio.file.Files.readAllLines(java.nio.file.Paths.get(filePath));
+                        java.util.List<Long> numbers = new java.util.ArrayList<>();
+                        for(String line : lines){
+                            for(String token : line.split(",")){
+                                if(!token.trim().isEmpty())
+                                    numbers.add(Long.parseLong(token.trim()));
+                            }
+                        }
+                        long start = System.nanoTime();
+                        RedBlackBST<Long, Long> st = new RedBlackBST<>();
+                        if(op.equals("insert")){
+                            for(Long num : numbers)
+                                st.put(num, num);
+                        } else if(op.equals("search")){
+                            for(Long num : numbers)
+                                st.put(num, num);
+                            for(Long num : numbers)
+                                st.get(num);
+                        } else if(op.equals("delete")){
+                            for(Long num : numbers)
+                                st.put(num, num);
+                            for(Long num : numbers)
+                                st.delete(num);
+                        }
+                        long duration = (System.nanoTime() - start) / 1000;
+                        pw.println(op + "," + set + "," + fileName + "," + duration);
+                        pw.flush();
+                    }
+                }
             }
-            long start = System.nanoTime();
-            for(Long num : numbers)
-                st.put(num, num); // changed here
-            long duration = (System.nanoTime() - start) / 1000;
-            System.out.println("RedBlackBST Insertion time for " + insertFile + ": " + duration + " µs");
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        
-        // --- Search Test ---
-        String searchFile = "data/search/set1/data_1.txt"; // adjust path as needed
-        try {
-            List<String> lines = Files.readAllLines(Paths.get(searchFile));
-            List<Long> numbers = new ArrayList<>();
-            for(String line : lines) {
-                String[] tokens = line.split(",");
-                for(String token : tokens)
-                    if(!token.trim().isEmpty())
-                        numbers.add(Long.parseLong(token.trim()));
-            }
-            long start = System.nanoTime();
-            for(Long num : numbers)
-                st.get(num);
-            long duration = (System.nanoTime() - start) / 1000;
-            System.out.println("RedBlackBST Search time for " + searchFile + ": " + duration + " µs");
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        
-        // --- Delete Test ---
-        String deleteFile = "data/delete/set1/data_1.txt"; // adjust path as needed
-        try {
-            List<String> lines = Files.readAllLines(Paths.get(deleteFile));
-            List<Long> numbers = new ArrayList<>();
-            for(String line : lines) {
-                String[] tokens = line.split(",");
-                for(String token : tokens)
-                    if(!token.trim().isEmpty())
-                        numbers.add(Long.parseLong(token.trim()));
-            }
-            long start = System.nanoTime();
-            for(Long num : numbers)
-                st.delete(num);
-            long duration = (System.nanoTime() - start) / 1000;
-            System.out.println("RedBlackBST Deletion time for " + deleteFile + ": " + duration + " µs");
-        } catch(Exception e) {
+        } catch(Exception e){
             e.printStackTrace();
         }
     }
