@@ -20,12 +20,22 @@ treap.print_treap()
 
 def visualize_treap(treap):
     def add_edges(graph, node):
+        # Process left child: add dummy "None" node if missing.
         if node.left:
-            graph.edge(f"{node.key}\n{node.priority}", f"{node.left.key}\n{node.left.priority}")
+            graph.edge(f"{node.key}\n{node.priority}", f"{node.left.key}\n{node.left.priority}", label="L")
             add_edges(graph, node.left)
+        else:
+            none_id = f"None_{node.key}_L"
+            graph.node(none_id, label="None")
+            graph.edge(f"{node.key}\n{node.priority}", none_id, label="L")
+        # Process right child: add dummy "None" node if missing.
         if node.right:
-            graph.edge(f"{node.key}\n{node.priority}", f"{node.right.key}\n{node.right.priority}")
+            graph.edge(f"{node.key}\n{node.priority}", f"{node.right.key}\n{node.right.priority}", label="R")
             add_edges(graph, node.right)
+        else:
+            none_id = f"None_{node.key}_R"
+            graph.node(none_id, label="None")
+            graph.edge(f"{node.key}\n{node.priority}", none_id, label="R")
 
     dot = graphviz.Digraph()
     if treap.root:
