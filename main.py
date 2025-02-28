@@ -54,7 +54,7 @@ def visualize_treap(treap):
     return dot
 
 print("Treap visualization after initial insertions:")
-visualize_treap(treap).render("treap_initial", format="png")
+visualize_treap(treap).render("results/treap_initial", format="png")
 
 # Insert (data=45, priority=55)
 key = 45 + u
@@ -64,7 +64,7 @@ print("\nTreap after inserting (data=45, priority=55):")
 treap_insert.print_treap()
 
 print("\nTreap visualization after inserting (data=45, priority=55):")
-visualize_treap(treap_insert).render("treap_after_insert", format="png")
+visualize_treap(treap_insert).render("results/treap_after_insert", format="png")
 
 # Delete data=30
 key = 30 + u
@@ -74,4 +74,4 @@ print("\nTreap after deleting data=30:")
 treap_delete.print_treap()
 
 print("\nTreap visualization after deleting data=30:")
-visualize_treap(treap_delete).render("treap_after_delete", format="png")
+visualize_treap(treap_delete).render("results/treap_after_delete", format="png")
