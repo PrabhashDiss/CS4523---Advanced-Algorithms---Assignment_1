@@ -53,7 +53,6 @@ def visualize_treap(treap):
         add_edges(dot, treap.root)
     return dot
 
-print("Treap visualization after initial insertions:")
 visualize_treap(treap).render("results/treap_initial", format="png")
 
 # Insert (data=45, priority=55)
@@ -63,7 +62,6 @@ treap_insert.insert_key(key, 55)
 print("\nTreap after inserting (data=45, priority=55):")
 treap_insert.print_treap()
 
-print("\nTreap visualization after inserting (data=45, priority=55):")
 visualize_treap(treap_insert).render("results/treap_after_insert", format="png")
 
 # Delete data=30
@@ -73,5 +71,4 @@ treap_delete.delete_key(key)
 print("\nTreap after deleting data=30:")
 treap_delete.print_treap()
 
-print("\nTreap visualization after deleting data=30:")
 visualize_treap(treap_delete).render("results/treap_after_delete", format="png")
