@@ -214,16 +214,16 @@ public class SplayBST<Key extends Comparable<Key>, Value> {
     // test client
     public static void main(String[] args) {
         String[] sets = {"set1", "set2"};
-        String[] operations = {"insert", "search", "delete"};
         String[] dataFiles = {"data_1.txt", "data_2.txt", "data_3.txt"};
+        String[] operations = {"insert", "search", "delete"};
         String resultsFile = "results/SplayBST_results.csv";
         
         try (java.io.PrintWriter pw = new java.io.PrintWriter(new java.io.FileWriter(resultsFile, true))) {
             // CSV header (if file is empty, user can remove header duplication)
             pw.println("Operation,Set,DataFile,Duration(us)");
-            for (String op : operations) {
-                for (String set : sets) {
-                    for (String fileName : dataFiles) {
+            for (String set : sets) {
+                for (String fileName : dataFiles) {
+                    for (String op : operations) {
                         String filePath = "data/" + op + "/" + set + "/" + fileName;
                         java.util.List<String> lines = java.nio.file.Files.readAllLines(java.nio.file.Paths.get(filePath));
                         java.util.List<Long> numbers = new java.util.ArrayList<>();
