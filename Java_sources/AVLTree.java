@@ -346,7 +346,7 @@ public class AVLTree<T extends Comparable<T>> {
         String resultsFile = "results/AVLTree_results.csv";
         
         try (java.io.PrintWriter pw = new java.io.PrintWriter(new java.io.FileWriter(resultsFile, true))) {
-            pw.println("Operation,Set,DataFile,Duration(us)");
+            pw.println("Operation,Set,DataFile,Duration(us),Error");
             for(String set : sets) {
                 for(String fileName : dataFiles) {
                     for(String op : operations) {
@@ -360,19 +360,24 @@ public class AVLTree<T extends Comparable<T>> {
                             }
                         }
                         long start = System.nanoTime();
-                        if(op.equals("insert")){
-                            avlTree = new AVLTree<>();
-                            for(Long num : numbers)
-                                avlTree.insert(num);
-                        } else if(op.equals("search")){
-                            for(Long num : numbers)
-                                avlTree.contains(num);
-                        } else if(op.equals("delete")){
-                            for(Long num : numbers)
-                                avlTree.remove(num);
+                        String error = "";
+                        try {
+                            if(op.equals("insert")){
+                                avlTree = new AVLTree<>();
+                                for(Long num : numbers)
+                                    avlTree.insert(num);
+                            } else if(op.equals("search")){
+                                for(Long num : numbers)
+                                    avlTree.contains(num);
+                            } else if(op.equals("delete")){
+                                for(Long num : numbers)
+                                    avlTree.remove(num);
+                            }
+                        } catch (StackOverflowError e) {
+                            error = "StackOverflowError";
                         }
                         long duration = (System.nanoTime() - start) / 1000;
-                        pw.println(op + "," + set + "," + fileName + "," + duration);
+                        pw.println(op + "," + set + "," + fileName + "," + duration + "," + error);
                         pw.flush();
                     }
                 }

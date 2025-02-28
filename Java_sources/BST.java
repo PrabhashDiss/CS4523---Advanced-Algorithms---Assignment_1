@@ -545,7 +545,7 @@ public class BST<Key extends Comparable<Key>, Value> {
         String resultsFile = "results/BST_results.csv";
         
         try (java.io.PrintWriter pw = new java.io.PrintWriter(new java.io.FileWriter(resultsFile, true))) {
-            pw.println("Operation,Set,DataFile,Duration(us)");
+            pw.println("Operation,Set,DataFile,Duration(us),Error");
             for(String set : sets) {
                 for(String fileName : dataFiles) {
                     for(String op : operations) {
@@ -559,19 +559,24 @@ public class BST<Key extends Comparable<Key>, Value> {
                             }
                         }
                         long start = System.nanoTime();
-                        if(op.equals("insert")){
-                            st = new BST<>();
-                            for(Long num : numbers)
-                                st.put(num, num);
-                        } else if(op.equals("search")){
-                            for(Long num : numbers)
-                                st.get(num);
-                        } else if(op.equals("delete")){
-                            for(Long num : numbers)
-                                st.delete(num);
+                        String error = "";
+                        try {
+                            if(op.equals("insert")){
+                                st = new BST<>();
+                                for(Long num : numbers)
+                                    st.put(num, num);
+                            } else if(op.equals("search")){
+                                for(Long num : numbers)
+                                    st.get(num);
+                            } else if(op.equals("delete")){
+                                for(Long num : numbers)
+                                    st.delete(num);
+                            }
+                        } catch (StackOverflowError e) {
+                            error = "StackOverflowError";
                         }
                         long duration = (System.nanoTime() - start) / 1000;
-                        pw.println(op + "," + set + "," + fileName + "," + duration);
+                        pw.println(op + "," + set + "," + fileName + "," + duration + "," + error);
                         pw.flush();
                     }
                 }

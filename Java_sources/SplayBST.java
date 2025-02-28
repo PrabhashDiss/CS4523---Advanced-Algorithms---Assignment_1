@@ -222,7 +222,7 @@ public class SplayBST<Key extends Comparable<Key>, Value> {
         
         try (java.io.PrintWriter pw = new java.io.PrintWriter(new java.io.FileWriter(resultsFile, true))) {
             // CSV header (if file is empty, user can remove header duplication)
-            pw.println("Operation,Set,DataFile,Duration(us)");
+            pw.println("Operation,Set,DataFile,Duration(us),Error");
             for (String set : sets) {
                 for (String fileName : dataFiles) {
                     for (String op : operations) {
@@ -237,19 +237,24 @@ public class SplayBST<Key extends Comparable<Key>, Value> {
                             }
                         }
                         long start = System.nanoTime();
-                        if(op.equals("insert")){
-                            st = new SplayBST<>();
-                            for(Long num : numbers)
-                                st.put(num, num);
-                        } else if(op.equals("search")){
-                            for(Long num : numbers)
-                                st.get(num);
-                        } else if(op.equals("delete")){
-                            for(Long num : numbers)
-                                st.remove(num);
+                        String error = "";
+                        try {
+                            if(op.equals("insert")){
+                                st = new SplayBST<>();
+                                for(Long num : numbers)
+                                    st.put(num, num);
+                            } else if(op.equals("search")){
+                                for(Long num : numbers)
+                                    st.get(num);
+                            } else if(op.equals("delete")){
+                                for(Long num : numbers)
+                                    st.remove(num);
+                            }
+                        } catch (StackOverflowError e) {
+                            error = "StackOverflowError";
                         }
                         long duration = (System.nanoTime() - start) / 1000;
-                        pw.println(op + "," + set + "," + fileName + "," + duration);
+                        pw.println(op + "," + set + "," + fileName + "," + duration + "," + error);
                         pw.flush();
                     }
                 }
