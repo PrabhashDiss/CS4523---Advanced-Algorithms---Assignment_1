@@ -5,6 +5,11 @@
  *  AVL Tree implementation in Java
  ********************************************************/
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
 public class AVLTree<T extends Comparable<T>> {
     /**
      * Node class for AVL Tree
@@ -334,8 +339,54 @@ public class AVLTree<T extends Comparable<T>> {
      */
     public static void main(String[] args) {
         AVLTree<Integer> avlTree = new AVLTree<>();
-
-//        TODO: Write the code here
+        
+        // --- Insertion Test ---
+        String insertFile = "data/insert/set1/data_1.txt"; // adjust path as needed
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(insertFile));
+            List<Integer> numbers = new ArrayList<>();
+            for(String line : lines)
+                numbers.add(Integer.parseInt(line.trim()));
+            long start = System.nanoTime();
+            for(Integer num : numbers)
+                avlTree.insert(num);
+            long duration = (System.nanoTime() - start) / 1000;
+            System.out.println("AVLTree Insertion time for " + insertFile + ": " + duration + " µs");
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        
+        // --- Search Test ---
+        String searchFile = "data/search/set1/data_1.txt"; // adjust path as needed
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(searchFile));
+            List<Integer> numbers = new ArrayList<>();
+            for(String line : lines)
+                numbers.add(Integer.parseInt(line.trim()));
+            long start = System.nanoTime();
+            for(Integer num : numbers)
+                avlTree.contains(num);
+            long duration = (System.nanoTime() - start) / 1000;
+            System.out.println("AVLTree Search time for " + searchFile + ": " + duration + " µs");
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        
+        // --- Delete Test ---
+        String deleteFile = "data/delete/set1/data_1.txt"; // adjust path as needed
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(deleteFile));
+            List<Integer> numbers = new ArrayList<>();
+            for(String line : lines)
+                numbers.add(Integer.parseInt(line.trim()));
+            long start = System.nanoTime();
+            for(Integer num : numbers)
+                avlTree.remove(num);
+            long duration = (System.nanoTime() - start) / 1000;
+            System.out.println("AVLTree Deletion time for " + deleteFile + ": " + duration + " µs");
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 }
 

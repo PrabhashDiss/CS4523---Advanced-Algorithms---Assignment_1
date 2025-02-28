@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 import java.util.Random;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 
 /******************************************************************************
  *  Compilation:  javac SplayBST.java
@@ -211,8 +214,54 @@ public class SplayBST<Key extends Comparable<Key>, Value> {
     // test client
     public static void main(String[] args) {
         SplayBST<Long, Integer> st = new SplayBST<>();
-
-//        TODO: Write the code here
+        
+        // --- Insertion Test ---
+        String insertFile = "data/insert/set1/data_1.txt"; // adjust path as needed
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(insertFile));
+            List<Long> numbers = new ArrayList<>();
+            for(String line : lines)
+                numbers.add(Long.parseLong(line.trim()));
+            long start = System.nanoTime();
+            for(Long num : numbers)
+                st.put(num, 1);
+            long duration = (System.nanoTime() - start) / 1000; // microseconds
+            System.out.println("SplayBST Insertion time for " + insertFile + ": " + duration + " µs");
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        
+        // --- Search Test ---
+        String searchFile = "data/search/set1/data_1.txt"; // adjust path as needed
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(searchFile));
+            List<Long> numbers = new ArrayList<>();
+            for(String line : lines)
+                numbers.add(Long.parseLong(line.trim()));
+            long start = System.nanoTime();
+            for(Long num : numbers)
+                st.get(num);
+            long duration = (System.nanoTime() - start) / 1000;
+            System.out.println("SplayBST Search time for " + searchFile + ": " + duration + " µs");
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        
+        // --- Delete Test ---
+        String deleteFile = "data/delete/set1/data_1.txt"; // adjust path as needed
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(deleteFile));
+            List<Long> numbers = new ArrayList<>();
+            for(String line : lines)
+                numbers.add(Long.parseLong(line.trim()));
+            long start = System.nanoTime();
+            for(Long num : numbers)
+                st.remove(num);
+            long duration = (System.nanoTime() - start) / 1000;
+            System.out.println("SplayBST Deletion time for " + deleteFile + ": " + duration + " µs");
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -30,6 +30,9 @@ import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.Queue;
 import java.util.LinkedList;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 
 /**
  * The {@code BST} class represents an ordered symbol table of generic
@@ -725,7 +728,53 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
      */
     public static void main(String[] args) {
         RedBlackBST<Long, Integer> st = new RedBlackBST<>();
+        
+        // --- Insertion Test ---
+        String insertFile = "data/insert/set1/data_1.txt"; // adjust path as needed
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(insertFile));
+            List<Long> numbers = new ArrayList<>();
+            for(String line : lines)
+                numbers.add(Long.parseLong(line.trim()));
+            long start = System.nanoTime();
+            for(Long num : numbers)
+                st.put(num, 1);
+            long duration = (System.nanoTime() - start) / 1000;
+            System.out.println("RedBlackBST Insertion time for " + insertFile + ": " + duration + " µs");
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
 
-//        TODO: Write the code here
+        // --- Search Test ---
+        String searchFile = "data/search/set1/data_1.txt"; // adjust path as needed
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(searchFile));
+            List<Long> numbers = new ArrayList<>();
+            for(String line : lines)
+                numbers.add(Long.parseLong(line.trim()));
+            long start = System.nanoTime();
+            for(Long num : numbers)
+                st.get(num);
+            long duration = (System.nanoTime() - start) / 1000;
+            System.out.println("RedBlackBST Search time for " + searchFile + ": " + duration + " µs");
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        
+        // --- Delete Test ---
+        String deleteFile = "data/delete/set1/data_1.txt"; // adjust path as needed
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(deleteFile));
+            List<Long> numbers = new ArrayList<>();
+            for(String line : lines)
+                numbers.add(Long.parseLong(line.trim()));
+            long start = System.nanoTime();
+            for(Long num : numbers)
+                st.delete(num);
+            long duration = (System.nanoTime() - start) / 1000;
+            System.out.println("RedBlackBST Deletion time for " + deleteFile + ": " + duration + " µs");
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 }
