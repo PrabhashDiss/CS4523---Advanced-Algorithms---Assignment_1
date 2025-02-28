@@ -24,3 +24,6 @@ java -cp "$BIN_DIR" BST
 
 echo "Running AVLTree..."
 java -cp "$BIN_DIR" AVLTree
+
+# Delete the bin directory
+rm -rf "$BIN_DIR"
