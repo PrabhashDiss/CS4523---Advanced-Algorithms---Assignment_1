@@ -9,11 +9,15 @@ data_priority_pairs = [
 ]
 
 treap = Treap()
+treap_insert = Treap()
+treap_delete = Treap()
 
-# Insert initial data
+# Insert initial data into treap, treap_insert, and treap_delete
 for data, priority in data_priority_pairs:
     key = data + u
     treap.insert_key(key, priority)
+    treap_insert.insert_key(key, priority)
+    treap_delete.insert_key(key, priority)
 
 print("Treap after initial insertions:")
 treap.print_treap()
@@ -54,20 +58,20 @@ visualize_treap(treap).render("treap_initial", format="png")
 
 # Insert (data=45, priority=55)
 key = 45 + u
-treap.insert_key(key, 55)
+treap_insert.insert_key(key, 55)
 
 print("\nTreap after inserting (data=45, priority=55):")
-treap.print_treap()
+treap_insert.print_treap()
 
 print("\nTreap visualization after inserting (data=45, priority=55):")
-visualize_treap(treap).render("treap_after_insert", format="png")
+visualize_treap(treap_insert).render("treap_after_insert", format="png")
 
 # Delete data=30
 key = 30 + u
-treap.delete_key(key)
+treap_delete.delete_key(key)
 
 print("\nTreap after deleting data=30:")
-treap.print_treap()
+treap_delete.print_treap()
 
 print("\nTreap visualization after deleting data=30:")
-visualize_treap(treap).render("treap_after_delete", format="png")
+visualize_treap(treap_delete).render("treap_after_delete", format="png")
