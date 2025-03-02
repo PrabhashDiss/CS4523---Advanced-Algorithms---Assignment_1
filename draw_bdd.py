@@ -1,5 +1,9 @@
 from pyeda.inter import *
 import graphviz
+import os
+
+# Create results directory if it doesn't exist
+os.makedirs('results', exist_ok=True)
 
 # Create variables
 x1, x2, x3, x4 = map(bddvar, ['x1', 'x2', 'x3', 'x4'])
@@ -13,8 +17,8 @@ dot = bdd.to_dot()
 # Create a Graphviz object from the dot string
 graph = graphviz.Source(dot)
 
-# Save the graph to a file (both dot and png formats)
-graph.save('bdd.dot')
-graph.render('bdd', format='png', cleanup=True)
+# Save the graph to a file in the results folder
+graph.save('results/bdd.dot')
+graph.render('results/bdd', format='png', cleanup=True)
 
-print("BDD has been drawn and saved as 'bdd.png'")
+print("BDD has been drawn and saved as 'results/bdd.png'")
