@@ -13,8 +13,8 @@ dot = bdd.to_dot()
 # Create a Graphviz object from the dot string
 graph = graphviz.Source(dot)
 
-# Save the graph to a file (both dot and pdf formats)
+# Save the graph to a file (both dot and png formats)
 graph.save('bdd.dot')
-graph.render('bdd', format='pdf', cleanup=True)
+graph.render('bdd', format='png', cleanup=True)
 
-print("BDD has been drawn and saved as 'bdd.pdf'")
+print("BDD has been drawn and saved as 'bdd.png'")
